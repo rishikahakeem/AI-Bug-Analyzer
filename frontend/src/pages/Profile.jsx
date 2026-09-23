@@ -60,6 +60,7 @@ function Profile() {
       );
 
       const history =
+        response.data?.analyses ||
         response.data?.history ||
         response.data?.data ||
         [];
