@@ -1,0 +1,14 @@
+# ============================================================
+# DATABASE FILES / BACKUPS
+# ============================================================
+
+*.sqlite
+*.sqlite3
+*.db
+*.bak
+
+# Allow the clean database schema for project review
+!database/schema.sql
+# Backup archives
+backend.zip
+frontend/src.zip

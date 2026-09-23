@@ -1,0 +1,1943 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #f7f8fc;
+  color: #111827;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  height: 76px;
+  padding: 0 6%;
+
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111827;
+  color: #ffffff;
+
+  border-radius: 11px;
+
+  transition: 0.3s ease;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-text strong {
+  font-size: 18px;
+  letter-spacing: -0.5px;
+}
+
+.logo-text strong span {
+  color: #635bff;
+}
+
+.logo-text small {
+  color: #9ca3af;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #111827;
+}
+
+.nav-links a.active {
+  color: #111827;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   NAV ACTIONS
+========================================================= */
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* =========================================================
+   GITHUB
+========================================================= */
+
+.github-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+  color: #6b7280;
+
+  transition: 0.2s ease;
+}
+
+.github-link:hover {
+  color: #111827;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+========================================================= */
+
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f8fafc;
+  color: #475569;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  font-size: 16px;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.theme-toggle:hover {
+  background: #eef2ff;
+  color: #635bff;
+  border-color: #c7d2fe;
+  transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   START ANALYZING BUTTON
+========================================================= */
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 11px 17px;
+
+  background: #111827;
+  color: #ffffff;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.nav-button:hover {
+  background: #635bff;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-nav-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 10px 15px;
+
+  background: #ffffff;
+  color: #374151;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.login-nav-button:hover {
+  color: #635bff;
+  border-color: #635bff;
+  background: #f8f7ff;
+}
+
+
+/* =========================================================
+   SIGN UP
+========================================================= */
+
+.signup-nav-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 10px 15px;
+
+  background: #635bff;
+  color: #ffffff;
+
+  border: 1px solid #635bff;
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.signup-nav-button:hover {
+  background: #5148e8;
+  border-color: #5148e8;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   USER
+========================================================= */
+
+.user-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 13px;
+
+  background: #f7f7ff;
+  color: #374151;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-nav svg {
+  color: #635bff;
+  font-size: 17px;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-nav-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 10px 15px;
+
+  background: #ffffff;
+  color: #dc2626;
+
+  border: 1px solid #fecaca;
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.logout-nav-button:hover {
+  background: #fff5f5;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 90px 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(99, 91, 255, 0.15),
+      transparent 45%
+    ),
+    #f7f8fc;
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 30px;
+
+  color: #635bff;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hero h1 {
+  margin: 25px 0 18px;
+
+  font-size: clamp(48px, 7vw, 82px);
+
+  line-height: 0.98;
+  letter-spacing: -4px;
+
+  color: #111827;
+}
+
+.hero h1 span {
+  color: #635bff;
+}
+
+.hero-description {
+  max-width: 650px;
+
+  color: #6b7280;
+
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+
+  margin-top: 32px;
+}
+
+.primary-button,
+.secondary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 22px;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+.primary-button {
+  background: #111827;
+  color: #ffffff;
+  border: 1px solid #111827;
+}
+
+.primary-button:hover {
+  background: #635bff;
+  border-color: #635bff;
+}
+
+.secondary-button {
+  background: #ffffff;
+  color: #111827;
+
+  border: 1px solid #d1d5db;
+}
+
+.secondary-button:hover {
+  border-color: #635bff;
+  color: #635bff;
+}
+
+.hero-trust {
+  display: flex;
+  gap: 28px;
+
+  margin-top: 35px;
+
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.hero-trust div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero-trust svg {
+  color: #635bff;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-section {
+  max-width: 1100px;
+  margin: -35px auto 0;
+
+  position: relative;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+
+  overflow: hidden;
+}
+
+.stat-card {
+  padding: 28px;
+  text-align: center;
+
+  border-right: 1px solid #e5e7eb;
+}
+
+.stat-card:last-child {
+  border-right: none;
+}
+
+.stat-card strong {
+  display: block;
+
+  font-size: 27px;
+  color: #111827;
+}
+
+.stat-card span {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   HOME SECTIONS
+========================================================= */
+
+.home-section,
+.how-section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 110px 30px;
+}
+
+.section-heading {
+  max-width: 650px;
+  margin-bottom: 55px;
+}
+
+.section-heading > span,
+.page-header > span,
+.home-cta span {
+  color: #635bff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.section-heading h2 {
+  margin: 14px 0;
+
+  font-size: 45px;
+  line-height: 1.1;
+  letter-spacing: -2px;
+
+  color: #111827;
+}
+
+.section-heading p {
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   FEATURE CARDS
+========================================================= */
+
+.home-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.large-feature-card {
+  padding: 35px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  position: relative;
+
+  transition: 0.25s ease;
+}
+
+.large-feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.07);
+}
+
+.feature-number {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  color: #d1d5db;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.large-feature-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f0efff;
+  color: #635bff;
+
+  border-radius: 12px;
+
+  font-size: 20px;
+}
+
+.large-feature-card h3 {
+  margin-top: 25px;
+  font-size: 20px;
+  color: #111827;
+}
+
+.large-feature-card p {
+  color: #6b7280;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.large-feature-card a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 25px;
+
+  color: #635bff;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.how-section {
+  background: #ffffff;
+  max-width: none;
+
+  padding-left: 8%;
+  padding-right: 8%;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  padding: 35px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #111827;
+  color: #ffffff;
+
+  border-radius: 12px;
+}
+
+.step-card > span {
+  display: block;
+
+  margin-top: 25px;
+
+  color: #635bff;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.step-card h3 {
+  font-size: 19px;
+  color: #111827;
+}
+
+.step-card p {
+  color: #6b7280;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.home-cta {
+  margin: 80px 6%;
+
+  padding: 65px;
+
+  border-radius: 24px;
+
+  background: #111827;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-cta h2 {
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -2px;
+}
+
+.home-cta p {
+  color: #9ca3af;
+}
+
+.cta-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 23px;
+
+  background: #ffffff;
+  color: #111827;
+
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.cta-button:hover {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+
+/* =========================================================
+   FEATURES PAGE
+========================================================= */
+
+.features-page,
+.history-page {
+  max-width: 1200px;
+  margin: auto;
+
+  padding: 90px 30px;
+}
+
+.page-header {
+  max-width: 700px;
+  margin-bottom: 60px;
+}
+
+.page-header h1 {
+  margin: 15px 0;
+
+  font-size: 50px;
+  letter-spacing: -2px;
+
+  color: #111827;
+}
+
+.page-header p {
+  color: #6b7280;
+  line-height: 1.7;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.feature-card {
+  padding: 28px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 15px;
+
+  position: relative;
+
+  transition: 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+}
+
+.feature-icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f0efff;
+  color: #635bff;
+
+  border-radius: 10px;
+}
+
+.feature-card .feature-number {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+}
+
+.feature-card h3 {
+  margin-top: 25px;
+  color: #111827;
+}
+
+.feature-card p {
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   HISTORY EMPTY
+========================================================= */
+
+.history-empty {
+  min-height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px dashed #d1d5db;
+  border-radius: 18px;
+
+  padding: 40px;
+}
+
+.history-empty-icon {
+  width: 65px;
+  height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f0efff;
+  color: #635bff;
+
+  border-radius: 15px;
+
+  font-size: 25px;
+}
+
+.history-empty p {
+  max-width: 450px;
+
+  color: #9ca3af;
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  margin-top: 80px;
+
+  padding: 65px 7% 25px;
+
+  background: #111827;
+  color: #ffffff;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+
+  padding-bottom: 50px;
+
+  border-bottom: 1px solid #374151;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 20px;
+}
+
+.footer-logo span {
+  color: #635bff;
+}
+
+.footer-brand p {
+  max-width: 350px;
+
+  color: #9ca3af;
+
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.footer-column h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.footer-column a,
+.footer-column span {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  padding-top: 25px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #6b7280;
+
+  font-size: 11px;
+}
+
+.footer-bottom svg {
+  color: #635bff;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading-spinner {
+  width: 38px;
+  height: 38px;
+
+  border: 3px solid #e5e7eb;
+  border-top-color: #635bff;
+
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-actions {
+    gap: 7px;
+  }
+
+  .login-nav-button,
+  .signup-nav-button,
+  .logout-nav-button {
+    padding: 9px 11px;
+  }
+
+  .nav-button {
+    padding: 10px 13px;
+  }
+}
+
+
+@media (max-width: 1000px) {
+  .nav-links {
+    gap: 18px;
+  }
+
+  .home-feature-grid,
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analyzer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+@media (max-width: 900px) {
+  .navbar {
+    height: auto;
+    min-height: 76px;
+    padding: 15px 4%;
+    flex-wrap: wrap;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+
+    justify-content: center;
+
+    gap: 22px;
+    padding-top: 8px;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .github-link {
+    display: none;
+  }
+
+  .hero {
+    min-height: 580px;
+  }
+
+  .hero h1 {
+    letter-spacing: -2px;
+  }
+
+  .hero-trust {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stats-section {
+    margin: 20px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .section-heading h2,
+  .page-header h1 {
+    font-size: 36px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-cta {
+    margin: 40px 20px;
+    padding: 35px;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 25px;
+  }
+
+  .home-cta h2 {
+    font-size: 35px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .nav-links {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+  }
+
+  .theme-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .nav-button {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .login-nav-button,
+  .signup-nav-button,
+  .logout-nav-button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .user-nav {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   DARK MODE
+   IMPORTANT:
+   This section is intentionally at the VERY BOTTOM
+   so it overrides the light-mode styles above.
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+html.dark-mode,
+html.dark-mode body,
+html.dark-mode #root {
+  background: #0b1120;
+  color: #f8fafc;
+}
+
+html.dark-mode body {
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+html.dark-mode .navbar {
+  background: #0f172a !important;
+  border-bottom: 1px solid #263449;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
+}
+
+html.dark-mode .logo {
+  color: #f8fafc;
+}
+
+html.dark-mode .logo-icon {
+  background: #1e293b;
+  color: #60a5fa;
+}
+
+html.dark-mode .logo-text strong {
+  color: #f8fafc;
+}
+
+html.dark-mode .logo-text strong span {
+  color: #818cf8;
+}
+
+html.dark-mode .logo-text small {
+  color: #64748b;
+}
+
+html.dark-mode .nav-links a {
+  color: #94a3b8;
+}
+
+html.dark-mode .nav-links a:hover,
+html.dark-mode .nav-links a.active {
+  color: #60a5fa;
+}
+
+html.dark-mode .github-link {
+  color: #94a3b8;
+}
+
+html.dark-mode .github-link:hover {
+  color: #f8fafc;
+}
+
+
+/* =========================================================
+   THEME BUTTON
+========================================================= */
+
+html.dark-mode .theme-toggle {
+  background: #1e293b;
+  color: #fbbf24;
+  border-color: #334155;
+}
+
+html.dark-mode .theme-toggle:hover {
+  background: #263449;
+  color: #fde68a;
+  border-color: #475569;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+html.dark-mode .login-nav-button {
+  background: #111827;
+  color: #cbd5e1;
+  border-color: #334155;
+}
+
+html.dark-mode .login-nav-button:hover {
+  background: #1e293b;
+  color: #ffffff;
+  border-color: #6366f1;
+}
+
+
+/* =========================================================
+   SIGN UP
+========================================================= */
+
+html.dark-mode .signup-nav-button {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+html.dark-mode .signup-nav-button:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+
+/* =========================================================
+   USER
+========================================================= */
+
+html.dark-mode .user-nav {
+  background: #172033;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+
+html.dark-mode .user-nav svg {
+  color: #818cf8;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+html.dark-mode .logout-nav-button {
+  background: #1e293b;
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+html.dark-mode .logout-nav-button:hover {
+  background: #450a0a;
+  color: #fecaca;
+  border-color: #991b1b;
+}
+
+
+/* =========================================================
+   START ANALYZING
+========================================================= */
+
+html.dark-mode .nav-button {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+html.dark-mode .nav-button:hover {
+  background: #6366f1;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+html.dark-mode .hero {
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(99, 91, 255, 0.22),
+      transparent 45%
+    ),
+    #0b1120;
+}
+
+html.dark-mode .hero-badge {
+  background: #111827;
+  border-color: #263449;
+  color: #818cf8;
+}
+
+html.dark-mode .hero h1 {
+  color: #f8fafc;
+}
+
+html.dark-mode .hero h1 span {
+  color: #818cf8;
+}
+
+html.dark-mode .hero-description {
+  color: #94a3b8;
+}
+
+html.dark-mode .hero-trust {
+  color: #94a3b8;
+}
+
+html.dark-mode .hero-trust svg {
+  color: #818cf8;
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+html.dark-mode .primary-button {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+}
+
+html.dark-mode .primary-button:hover {
+  background: #6366f1;
+  border-color: #6366f1;
+}
+
+html.dark-mode .secondary-button {
+  background: #111827;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+html.dark-mode .secondary-button:hover {
+  background: #1e293b;
+  border-color: #6366f1;
+  color: #a5b4fc;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+html.dark-mode .stats-section {
+  background: #111827;
+  border-color: #263449;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.30);
+}
+
+html.dark-mode .stat-card {
+  border-color: #263449;
+}
+
+html.dark-mode .stat-card strong {
+  color: #f8fafc;
+}
+
+html.dark-mode .stat-card span {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   HOME SECTIONS
+========================================================= */
+
+html.dark-mode .home-section {
+  background: #0b1120;
+}
+
+html.dark-mode .section-heading > span,
+html.dark-mode .page-header > span,
+html.dark-mode .home-cta span {
+  color: #818cf8;
+}
+
+html.dark-mode .section-heading h2 {
+  color: #f8fafc;
+}
+
+html.dark-mode .section-heading p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   LARGE FEATURE CARDS
+========================================================= */
+
+html.dark-mode .large-feature-card {
+  background: #111827;
+  border-color: #263449;
+  color: #f8fafc;
+}
+
+html.dark-mode .large-feature-card:hover {
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+html.dark-mode .feature-number {
+  color: #475569;
+}
+
+html.dark-mode .large-feature-icon {
+  background: #1e1b4b;
+  color: #818cf8;
+}
+
+html.dark-mode .large-feature-card h3 {
+  color: #f8fafc;
+}
+
+html.dark-mode .large-feature-card p {
+  color: #94a3b8;
+}
+
+html.dark-mode .large-feature-card a {
+  color: #818cf8;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+html.dark-mode .how-section {
+  background: #0f172a;
+}
+
+html.dark-mode .step-card {
+  background: #111827;
+  border-color: #263449;
+  color: #f8fafc;
+}
+
+html.dark-mode .step-icon {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+html.dark-mode .step-card > span {
+  color: #818cf8;
+}
+
+html.dark-mode .step-card h3 {
+  color: #f8fafc;
+}
+
+html.dark-mode .step-card p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+html.dark-mode .home-cta {
+  background:
+    linear-gradient(
+      135deg,
+      #111827,
+      #172554
+    );
+
+  border: 1px solid #263449;
+}
+
+html.dark-mode .home-cta h2 {
+  color: #ffffff;
+}
+
+html.dark-mode .home-cta p {
+  color: #94a3b8;
+}
+
+html.dark-mode .cta-button {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+html.dark-mode .cta-button:hover {
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+
+/* =========================================================
+   FEATURES PAGE
+========================================================= */
+
+html.dark-mode .features-page,
+html.dark-mode .history-page {
+  background: #0b1120;
+}
+
+html.dark-mode .page-header h1 {
+  color: #f8fafc;
+}
+
+html.dark-mode .page-header p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   FEATURE CARD
+========================================================= */
+
+html.dark-mode .feature-card {
+  background: #111827;
+  border-color: #263449;
+  color: #f8fafc;
+}
+
+html.dark-mode .feature-card:hover {
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+html.dark-mode .feature-icon {
+  background: #1e1b4b;
+  color: #818cf8;
+}
+
+html.dark-mode .feature-card h3 {
+  color: #f8fafc;
+}
+
+html.dark-mode .feature-card p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+html.dark-mode .history-empty {
+  background: #111827;
+  border-color: #334155;
+  color: #f8fafc;
+}
+
+html.dark-mode .history-empty-icon {
+  background: #1e1b4b;
+  color: #818cf8;
+}
+
+html.dark-mode .history-empty p {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   HISTORY CARDS
+========================================================= */
+
+html.dark-mode .history-card,
+html.dark-mode .history-item,
+html.dark-mode .history-filter-card {
+  background: #111827;
+  border-color: #263449;
+  color: #f8fafc;
+}
+
+
+/* =========================================================
+   SEARCH / FILTER
+========================================================= */
+
+html.dark-mode .history-search-box {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+html.dark-mode .history-search-box input {
+  background: transparent;
+  border: none;
+  color: #f8fafc;
+}
+
+html.dark-mode .history-language-filter {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+html.dark-mode .clear-search-button,
+html.dark-mode .clear-history-filter-button {
+  color: #94a3b8;
+}
+
+html.dark-mode .clear-search-button:hover,
+html.dark-mode .clear-history-filter-button:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   INPUTS / SELECT / TEXTAREA
+========================================================= */
+
+html.dark-mode input,
+html.dark-mode textarea,
+html.dark-mode select {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder {
+  color: #64748b;
+}
+
+html.dark-mode input:focus,
+html.dark-mode textarea:focus,
+html.dark-mode select:focus {
+  outline: none;
+  border-color: #6366f1;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+
+/* =========================================================
+   ANALYZER PAGE
+========================================================= */
+
+html.dark-mode .analyzer-page,
+html.dark-mode .analyzer-container,
+html.dark-mode .analyzer-content {
+  background: #0b1120;
+  color: #f8fafc;
+}
+
+
+/* =========================================================
+   ANALYSIS RESULT
+========================================================= */
+
+html.dark-mode .analysis-result,
+html.dark-mode .result-section,
+html.dark-mode .result-card {
+  background: #111827;
+  color: #f8fafc;
+  border-color: #263449;
+}
+
+
+/* =========================================================
+   ANALYSIS TEXT
+========================================================= */
+
+html.dark-mode .bug-text,
+html.dark-mode .severity-text,
+html.dark-mode .explanation-text,
+html.dark-mode .root-cause-text,
+html.dark-mode .suggested-fix-text,
+html.dark-mode .improvements-text {
+  color: #cbd5e1;
+}
+
+
+/* =========================================================
+   CODE AREA
+========================================================= */
+
+html.dark-mode pre,
+html.dark-mode code {
+  background: #020617;
+  color: #e2e8f0;
+  border-color: #1e293b;
+}
+
+
+/* =========================================================
+   COPY / DOWNLOAD BUTTONS
+========================================================= */
+
+html.dark-mode .copy-result-btn,
+html.dark-mode .download-result-btn {
+  background: #172033;
+  color: #e2e8f0;
+  border-color: #334155;
+}
+
+html.dark-mode .copy-result-btn:hover,
+html.dark-mode .download-result-btn:hover {
+  background: #263449;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   AUTH CARDS
+========================================================= */
+
+html.dark-mode .auth-card,
+html.dark-mode .login-card,
+html.dark-mode .signup-card {
+  background: #111827;
+  color: #f8fafc;
+  border-color: #263449;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+html.dark-mode .auth-card h1,
+html.dark-mode .auth-card h2,
+html.dark-mode .login-card h1,
+html.dark-mode .login-card h2,
+html.dark-mode .signup-card h1,
+html.dark-mode .signup-card h2 {
+  color: #f8fafc;
+}
+
+
+/* =========================================================
+   COMMON CARDS
+========================================================= */
+
+html.dark-mode .card,
+html.dark-mode .analysis-card,
+html.dark-mode .dashboard-card {
+  background: #111827;
+  color: #f8fafc;
+  border-color: #263449;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTONS
+========================================================= */
+
+html.dark-mode button.primary,
+html.dark-mode .primary-button {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+html.dark-mode button.primary:hover,
+html.dark-mode .primary-button:hover {
+  background: #6366f1;
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+html.dark-mode a {
+  transition: color 0.2s ease;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+html.dark-mode .footer {
+  background: #080d18;
+  color: #ffffff;
+
+  border-top: 1px solid #1e293b;
+}
+
+html.dark-mode .footer-main {
+  border-bottom-color: #263449;
+}
+
+html.dark-mode .footer-logo {
+  color: #ffffff;
+}
+
+html.dark-mode .footer-logo span {
+  color: #818cf8;
+}
+
+html.dark-mode .footer-brand p,
+html.dark-mode .footer-column a,
+html.dark-mode .footer-column span {
+  color: #94a3b8;
+}
+
+html.dark-mode .footer-column a:hover {
+  color: #ffffff;
+}
+
+html.dark-mode .footer-bottom {
+  color: #64748b;
+}
+
+html.dark-mode .footer-bottom svg {
+  color: #818cf8;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+html.dark-mode .loading-spinner {
+  border-color: #334155;
+  border-top-color: #818cf8;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+html.dark-mode ::-webkit-scrollbar {
+  width: 9px;
+}
+
+html.dark-mode ::-webkit-scrollbar-track {
+  background: #0b1120;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+
+/* =========================================================
+   DARK MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  html.dark-mode .stat-card {
+    border-bottom-color: #263449;
+  }
+}
