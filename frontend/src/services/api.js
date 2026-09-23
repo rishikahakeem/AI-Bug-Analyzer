@@ -1,17 +1,16 @@
-import axios from "axios";
 
+import axios from "axios";
 
 // =========================================================
 // AXIOS API INSTANCE
 // =========================================================
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:5000",
+  baseURL: "https://ai-bug-analyzer-p2wc.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
 });
-
 
 // =========================================================
 // ANALYZE CODE
@@ -21,7 +20,6 @@ export const analyzeCode = async (
   code,
   language
 ) => {
-
   const userId =
     localStorage.getItem("userId");
 
@@ -38,13 +36,11 @@ export const analyzeCode = async (
   return response.data;
 };
 
-
 // =========================================================
 // GET ANALYSIS HISTORY
 // =========================================================
 
 export const getAnalysisHistory = async () => {
-
   const userId =
     localStorage.getItem("userId");
 
@@ -62,14 +58,12 @@ export const getAnalysisHistory = async () => {
   return response.data;
 };
 
-
 // =========================================================
 // DELETE ANALYSIS HISTORY
 // =========================================================
 
 export const deleteAnalysis =
   async (analysisId) => {
-
     const response =
       await API.delete(
         `/api/history/${analysisId}`
@@ -78,14 +72,12 @@ export const deleteAnalysis =
     return response.data;
   };
 
-
 // =========================================================
 // GET GITHUB REPOSITORY FILES
 // =========================================================
 
 export const getGithubFiles =
   async (githubUrl) => {
-
     const response =
       await API.post(
         "/api/github/files",
@@ -97,7 +89,6 @@ export const getGithubFiles =
     return response.data;
   };
 
-
 // =========================================================
 // GET GITHUB FILE CONTENT
 // =========================================================
@@ -108,7 +99,6 @@ export const getGithubFile =
     repo,
     path
   ) => {
-
     const response =
       await API.post(
         "/api/github/file",
@@ -121,7 +111,6 @@ export const getGithubFile =
 
     return response.data;
   };
-
 
 // =========================================================
 // EXPORT API INSTANCE
