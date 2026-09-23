@@ -1,3 +1,6 @@
+
+import os
+
 import mysql.connector
 from mysql.connector import Error
 
@@ -7,10 +10,11 @@ from mysql.connector import Error
 # =========================================================
 
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "ai_bug_analyzer"
+    "host": os.getenv("MYSQL_HOST", "localhost"),
+    "user": os.getenv("MYSQL_USER", "root"),
+    "password": os.getenv("MYSQL_PASSWORD", ""),
+    "database": os.getenv("MYSQL_DATABASE", "ai_bug_analyzer"),
+    "port": int(os.getenv("MYSQL_PORT", "3306")),
 }
 
 
@@ -28,7 +32,8 @@ def get_db_connection():
             host=DB_CONFIG["host"],
             user=DB_CONFIG["user"],
             password=DB_CONFIG["password"],
-            database=DB_CONFIG["database"]
+            database=DB_CONFIG["database"],
+            port=DB_CONFIG["port"],
         )
 
         if connection.is_connected():
@@ -36,6 +41,7 @@ def get_db_connection():
             # -------------------------------------------------
             # Set MySQL session timezone to IST
             # -------------------------------------------------
+
             cursor = connection.cursor()
 
             try:
