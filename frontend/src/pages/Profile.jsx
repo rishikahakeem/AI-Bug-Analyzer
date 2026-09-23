@@ -56,7 +56,7 @@ function Profile() {
       }
 
       const response = await axios.get(
-        `http://127.0.0.1:5000/api/history/${id}`
+        `https://ai-bug-analyzer-p2wc.onrender.com/api/history/${id}`
       );
 
       const history =
@@ -102,7 +102,6 @@ function Profile() {
           <span>Back</span>
         </button>
 
-
         {/* HEADER */}
 
         <div className="profile-header">
@@ -115,7 +114,6 @@ function Profile() {
             view your analysis activity.
           </p>
         </div>
-
 
         {/* USER CARD */}
 
@@ -132,7 +130,6 @@ function Profile() {
           </div>
 
         </section>
-
 
         {/* DETAILS */}
 
@@ -156,7 +153,6 @@ function Profile() {
 
           </article>
 
-
           {/* EMAIL */}
 
           <article className="profile-detail-card profile-email-card">
@@ -175,7 +171,6 @@ function Profile() {
 
           </article>
 
-
           {/* USER ID */}
 
           <article className="profile-detail-card profile-id-card">
@@ -193,7 +188,6 @@ function Profile() {
             </div>
 
           </article>
-
 
           {/* ANALYSES */}
 
@@ -214,7 +208,6 @@ function Profile() {
           </article>
 
         </section>
-
 
         {/* LOGOUT */}
 

@@ -34,7 +34,7 @@ function ForgotPassword() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/auth/forgot-password",
+        "https://ai-bug-analyzer-p2wc.onrender.com/api/auth/forgot-password",
         {
           email: email.trim(),
         }

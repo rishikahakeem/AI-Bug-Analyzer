@@ -1,7 +1,9 @@
+
 /* eslint-disable react-hooks/immutability */
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -14,6 +16,10 @@ function Dashboard() {
     fetchHistory();
   }, []);
 
+  // =====================================================
+  // FETCH HISTORY
+  // =====================================================
+
   const fetchHistory = async () => {
     try {
       if (!userId) {
@@ -22,7 +28,7 @@ function Dashboard() {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/history/${userId}`
+        `https://ai-bug-analyzer-p2wc.onrender.com/api/history/${userId}`
       );
 
       const data = await response.json();
@@ -40,12 +46,18 @@ function Dashboard() {
     }
   };
 
-  // Get result text safely
+  // =====================================================
+  // GET RESULT TEXT SAFELY
+  // =====================================================
+
   const getResult = (item) => {
     return item.result || "";
   };
 
-  // Extract a section from AI analysis result
+  // =====================================================
+  // EXTRACT SECTION FROM AI ANALYSIS
+  // =====================================================
+
   const getSection = (result, sectionName) => {
     if (!result) {
       return "";
@@ -53,7 +65,10 @@ function Dashboard() {
 
     const text = String(result).replace(/\r\n/g, "\n");
 
-    const escaped = sectionName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const escaped = sectionName.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
 
     const startPattern = new RegExp(
       `(?:^|\\n)\\s*${escaped}\\s*:?[ \\t]*(?:\\n|$)`,
@@ -66,41 +81,65 @@ function Dashboard() {
       return "";
     }
 
-    const contentStart = startMatch.index + startMatch[0].length;
+    const contentStart =
+      startMatch.index + startMatch[0].length;
 
     const remaining = text.slice(contentStart);
-    const endMatch = remaining.match(/\n[A-Z][A-Z ]{2,}\s*:?[ \t]*(?:\n|$)/);
+
+    const endMatch = remaining.match(
+      /\n[A-Z][A-Z ]{2,}\s*:?[ \t]*(?:\n|$)/
+    );
 
     const endIndex = endMatch
       ? contentStart + endMatch.index
       : text.length;
 
-    return text.slice(contentStart, endIndex).trim();
+    return text
+      .slice(contentStart, endIndex)
+      .trim();
   };
 
-  // Get severity
+  // =====================================================
+  // GET SEVERITY
+  // =====================================================
+
   const getSeverity = (item) => {
     const result = getResult(item);
 
-    const severity = getSection(result, "SEVERITY");
+    const severity = getSection(
+      result,
+      "SEVERITY"
+    );
 
     if (!severity) {
       return "NONE";
     }
 
-    const firstLine = severity
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean)[0] || "";
+    const firstLine =
+      severity
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)[0] || "";
 
     const upper = firstLine.toUpperCase();
 
-    const allowed = ["CRITICAL", "HIGH", "MEDIUM", "LOW", "NONE"];
+    const allowed = [
+      "CRITICAL",
+      "HIGH",
+      "MEDIUM",
+      "LOW",
+      "NONE",
+    ];
 
-    return allowed.includes(upper) ? upper : "NONE";
+    return allowed.includes(upper)
+      ? upper
+      : "NONE";
   };
 
-  // Format date
+  // =====================================================
+  // FORMAT DATE
+  // =====================================================
+
   const formatDate = (dateValue) => {
     if (!dateValue) {
       return "Date unavailable";
@@ -126,6 +165,7 @@ function Dashboard() {
     }
 
     return date.toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
       day: "2-digit",
       month: "short",
       year: "numeric",
@@ -141,23 +181,28 @@ function Dashboard() {
   const totalAnalyses = history.length;
 
   const criticalCount = history.filter(
-    (item) => getSeverity(item) === "CRITICAL"
+    (item) =>
+      getSeverity(item) === "CRITICAL"
   ).length;
 
   const highCount = history.filter(
-    (item) => getSeverity(item) === "HIGH"
+    (item) =>
+      getSeverity(item) === "HIGH"
   ).length;
 
   const mediumCount = history.filter(
-    (item) => getSeverity(item) === "MEDIUM"
+    (item) =>
+      getSeverity(item) === "MEDIUM"
   ).length;
 
   const lowCount = history.filter(
-    (item) => getSeverity(item) === "LOW"
+    (item) =>
+      getSeverity(item) === "LOW"
   ).length;
 
   const totalBugs = history.filter(
-    (item) => getSeverity(item) !== "NONE"
+    (item) =>
+      getSeverity(item) !== "NONE"
   ).length;
 
   // =====================================================
@@ -166,6 +211,10 @@ function Dashboard() {
 
   return (
     <div className="dashboard-page">
+
+      {/* =================================================
+          HEADER
+          ================================================= */}
 
       <div className="dashboard-header">
 
@@ -185,8 +234,11 @@ function Dashboard() {
 
       </div>
 
-      {loading ? (
+      {/* =================================================
+          LOADING
+          ================================================= */}
 
+      {loading ? (
         <div className="dashboard-loading">
 
           <div className="loading-spinner"></div>
@@ -196,10 +248,12 @@ function Dashboard() {
           </p>
 
         </div>
-
       ) : (
-
         <>
+
+          {/* =================================================
+              STATISTICS
+              ================================================= */}
 
           <div className="dashboard-stats">
 
@@ -318,8 +372,15 @@ function Dashboard() {
 
           </div>
 
+          {/* =================================================
+              DASHBOARD GRID
+              ================================================= */}
 
           <div className="dashboard-grid">
+
+            {/* =================================================
+                SEVERITY OVERVIEW
+                ================================================= */}
 
             <div className="dashboard-card severity-card">
 
@@ -343,6 +404,8 @@ function Dashboard() {
 
 
               <div className="severity-list">
+
+                {/* CRITICAL */}
 
                 <div className="severity-item">
 
@@ -375,6 +438,8 @@ function Dashboard() {
                 </div>
 
 
+                {/* HIGH */}
+
                 <div className="severity-item">
 
                   <div className="severity-top">
@@ -406,6 +471,8 @@ function Dashboard() {
                 </div>
 
 
+                {/* MEDIUM */}
+
                 <div className="severity-item">
 
                   <div className="severity-top">
@@ -436,6 +503,8 @@ function Dashboard() {
 
                 </div>
 
+
+                {/* LOW */}
 
                 <div className="severity-item">
 
@@ -472,11 +541,16 @@ function Dashboard() {
             </div>
 
 
+            {/* =================================================
+                ANALYSIS SUMMARY
+                ================================================= */}
+
             <div className="dashboard-card summary-card">
 
               <div className="card-header">
 
                 <div>
+
                   <h2>
                     Analysis Summary
                   </h2>
@@ -484,6 +558,7 @@ function Dashboard() {
                   <p>
                     Your current activity
                   </p>
+
                 </div>
 
                 <div className="card-icon">
@@ -551,6 +626,10 @@ function Dashboard() {
           </div>
 
 
+          {/* =================================================
+              ACTION CARDS
+              ================================================= */}
+
           <div className="dashboard-actions">
 
             <div className="action-card">
@@ -612,6 +691,10 @@ function Dashboard() {
 
           </div>
 
+
+          {/* =================================================
+              RECENT ANALYSES
+              ================================================= */}
 
           <div className="recent-section">
 
@@ -684,7 +767,6 @@ function Dashboard() {
                       getSeverity(item);
 
                     return (
-
                       <div
                         className="table-row"
                         key={
@@ -695,9 +777,12 @@ function Dashboard() {
                       >
 
                         <span className="language-cell">
+
                           💻{" "}
+
                           {item.language ||
                             "Python"}
+
                         </span>
 
 
@@ -716,14 +801,13 @@ function Dashboard() {
 
                           {formatDate(
                             item.created_at ||
-                              item.createdAt ||
-                              item.date
+                            item.createdAt ||
+                            item.date
                           )}
 
                         </span>
 
                       </div>
-
                     );
                   })}
 
@@ -734,7 +818,6 @@ function Dashboard() {
           </div>
 
         </>
-
       )}
 
     </div>

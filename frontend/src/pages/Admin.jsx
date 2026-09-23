@@ -14,7 +14,6 @@ import {
 
 import "./Admin.css";
 
-
 function Admin() {
   const navigate = useNavigate();
 
@@ -31,7 +30,6 @@ function Admin() {
   const [languageStats, setLanguageStats] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);
   const [recentAnalyses, setRecentAnalyses] = useState([]);
-
 
   // =========================================================
   // FETCH ADMIN DATA
@@ -53,7 +51,7 @@ function Admin() {
         }
 
         const response = await axios.get(
-          `http://127.0.0.1:5000/api/admin/dashboard/${userId}`
+          `https://ai-bug-analyzer-p2wc.onrender.com/api/admin/dashboard/${userId}`
         );
 
         if (!response.data?.success) {
@@ -112,7 +110,6 @@ function Admin() {
     fetchAdminDashboard();
   }, [navigate]);
 
-
   // =========================================================
   // FORMAT DATE
   // =========================================================
@@ -139,7 +136,6 @@ function Admin() {
     }
   };
 
-
   // =========================================================
   // LOADING
   // =========================================================
@@ -147,9 +143,7 @@ function Admin() {
   if (loading) {
     return (
       <main className="admin-page">
-
         <div className="admin-loading">
-
           <div className="admin-spinner"></div>
 
           <h2>
@@ -160,13 +154,10 @@ function Admin() {
             Please wait while we load the
             administration data.
           </p>
-
         </div>
-
       </main>
     );
   }
-
 
   // =========================================================
   // ERROR
@@ -175,9 +166,7 @@ function Admin() {
   if (error) {
     return (
       <main className="admin-page">
-
         <div className="admin-error">
-
           <FaExclamationTriangle />
 
           <h2>
@@ -194,13 +183,10 @@ function Admin() {
           >
             Go Home
           </button>
-
         </div>
-
       </main>
     );
   }
-
 
   // =========================================================
   // ADMIN DASHBOARD
@@ -208,7 +194,6 @@ function Admin() {
 
   return (
     <main className="admin-page">
-
       <div className="admin-container">
 
         {/* ===================================================
@@ -223,7 +208,6 @@ function Admin() {
           <FaArrowLeft />
           Back
         </button>
-
 
         {/* ===================================================
             HEADER
@@ -247,7 +231,6 @@ function Admin() {
             </p>
 
           </div>
-
 
           <div className="admin-profile">
 
@@ -273,7 +256,6 @@ function Admin() {
 
         </div>
 
-
         {/* ===================================================
             STAT CARDS
         =================================================== */}
@@ -298,7 +280,6 @@ function Admin() {
 
           </div>
 
-
           <div className="admin-stat-card analyses">
 
             <div className="admin-stat-icon">
@@ -317,7 +298,6 @@ function Admin() {
 
           </div>
 
-
           <div className="admin-stat-card languages">
 
             <div className="admin-stat-icon">
@@ -335,7 +315,6 @@ function Admin() {
             </div>
 
           </div>
-
 
           <div className="admin-stat-card activity">
 
@@ -357,7 +336,6 @@ function Admin() {
 
         </section>
 
-
         {/* ===================================================
             LANGUAGE STATISTICS
         =================================================== */}
@@ -377,7 +355,6 @@ function Admin() {
             </div>
 
           </div>
-
 
           {languageStats.length === 0 ? (
 
@@ -420,7 +397,6 @@ function Admin() {
 
         </section>
 
-
         {/* ===================================================
             RECENT USERS
         =================================================== */}
@@ -440,7 +416,6 @@ function Admin() {
             </div>
 
           </div>
-
 
           {recentUsers.length === 0 ? (
 
@@ -516,7 +491,6 @@ function Admin() {
 
         </section>
 
-
         {/* ===================================================
             RECENT ANALYSES
         =================================================== */}
@@ -536,7 +510,6 @@ function Admin() {
             </div>
 
           </div>
-
 
           {recentAnalyses.length === 0 ? (
 
@@ -607,7 +580,6 @@ function Admin() {
         </section>
 
       </div>
-
     </main>
   );
 }

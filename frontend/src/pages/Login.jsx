@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -54,7 +55,7 @@ function Login() {
       setLoading(true);
 
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/auth/login",
+        "https://ai-bug-analyzer-p2wc.onrender.com/api/auth/login",
         {
           email,
           password,
@@ -293,3 +294,4 @@ function Login() {
 }
 
 export default Login;
+

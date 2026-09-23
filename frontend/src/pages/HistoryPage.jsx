@@ -19,7 +19,7 @@ import {
 
 import "./History.css";
 
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = "https://ai-bug-analyzer-p2wc.onrender.com";
 
 /* ============================================================
    DATE
