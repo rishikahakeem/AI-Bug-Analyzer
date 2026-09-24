@@ -1,4 +1,4 @@
-// BUILD MARKER v6
+// BUILD MARKER v7
 //* eslint-disable no-useless-assignment */
 
 import { useState } from "react";
@@ -430,69 +430,6 @@ const normalizeComplexity = (complexity) => {
 
 
 /* =========================================================
-   EXPORT-ONLY COMPLEXITY FALLBACK
-========================================================= */
-
-const calculateExportComplexity = (sourceCode = "", existingComplexity = {}) => {
-  const normalized = normalizeComplexity(existingComplexity);
-  const code = String(sourceCode || "");
-  if (!code.trim()) return normalized;
-
-  const lines = code.split("\n");
-  const totalLines = lines.length;
-  const blankLines = lines.filter((line) => !line.trim()).length;
-  const commentLines = lines.filter((line) => {
-    const trimmed = line.trim();
-    return trimmed.startsWith("#") || trimmed.startsWith("//") || trimmed.startsWith("/*") || trimmed.startsWith("*");
-  }).length;
-  const codeLines = Math.max(0, totalLines - blankLines - commentLines);
-  const functions = (code.match(/^\s*(?:def\s+\w+|function\s+\w+|(?:public|private|protected)?\s*(?:static\s+)?[\w<>\\[\]]+\s+\w+\s*\()/gm) || []).length;
-  const classes = (code.match(/^\s*(?:class|interface|enum)\s+\w+/gm) || []).length;
-  const longLines = lines.filter((line) => line.length > 100).length;
-  const nonEmptyLines = lines.filter((line) => line.trim().length > 0);
-  const averageLineLength = nonEmptyLines.length > 0
-    ? Number((nonEmptyLines.reduce((sum, line) => sum + line.length, 0) / nonEmptyLines.length).toFixed(2))
-    : 0;
-  const conditionalCount = (code.match(/\b(if|elif|else if|for|while|case|catch|except|&&|\|\|)\b/g) || []).length;
-  const cyclomatic = 1 + conditionalCount;
-
-  let maxNestingDepth = 0;
-  let currentDepth = 0;
-  lines.forEach((line) => {
-    const trimmed = line.trim();
-    if (!trimmed) return;
-    const opening = (line.match(/[{([]/g) || []).length;
-    const closing = (line.match(/[}\])]/g) || []).length;
-    currentDepth = Math.max(0, currentDepth + opening - closing);
-    maxNestingDepth = Math.max(maxNestingDepth, currentDepth);
-  });
-
-  const maintainability = Math.max(0, Math.min(100, Math.round(
-    100 - Math.min(35, totalLines * 0.7) - Math.min(20, longLines * 2) - Math.min(20, Math.max(0, cyclomatic - 5) * 3)
-  )));
-
-  let complexityLevel = "LOW";
-  if (cyclomatic > 15 || maxNestingDepth > 5 || totalLines > 300) complexityLevel = "HIGH";
-  else if (cyclomatic > 8 || maxNestingDepth > 3 || totalLines > 150) complexityLevel = "MEDIUM";
-
-  return {
-    totalLines: normalized.totalLines > 0 ? normalized.totalLines : totalLines,
-    codeLines: normalized.codeLines > 0 ? normalized.codeLines : codeLines,
-    blankLines: normalized.blankLines > 0 ? normalized.blankLines : blankLines,
-    commentLines: normalized.commentLines > 0 ? normalized.commentLines : commentLines,
-    functions: normalized.functions > 0 ? normalized.functions : functions,
-    classes: normalized.classes > 0 ? normalized.classes : classes,
-    cyclomaticComplexity: normalized.cyclomaticComplexity !== null && normalized.cyclomaticComplexity !== undefined ? normalized.cyclomaticComplexity : cyclomatic,
-    maxNestingDepth: normalized.maxNestingDepth > 0 ? normalized.maxNestingDepth : maxNestingDepth,
-    longLines: normalized.longLines > 0 ? normalized.longLines : longLines,
-    averageLineLength: normalized.averageLineLength > 0 ? normalized.averageLineLength : averageLineLength,
-    complexityLevel: normalized.complexityLevel !== "UNKNOWN" ? normalized.complexityLevel : complexityLevel,
-    maintainabilityIndex: normalized.maintainabilityIndex > 0 ? normalized.maintainabilityIndex : maintainability,
-  };
-};
-
-
-/* =========================================================
    SECURITY NORMALIZATION
 ========================================================= */
 
@@ -592,6 +529,10 @@ const getCodeQuality = (sourceCode, staticAnalysis, security) => {
 
 /* =========================================================
    EXPORT DATA NORMALIZATION
+
+   IMPORTANT:
+   Complexity comes directly from `result.complexity` (the same
+   object the UI shows). We do NOT recalculate it from the source.
 ========================================================= */
 
 const buildExportSnapshot = (result, sourceCode, testCases, language, fileName) => {
@@ -604,9 +545,12 @@ const buildExportSnapshot = (result, sourceCode, testCases, language, fileName) 
   const normalizedStaticAnalysis = normalizeStaticAnalysis(staticAnalysisSource);
   const normalizedPostFixAnalysis = normalizeStaticAnalysis(postFixSource);
 
-  const complexity = calculateExportComplexity(
-    source,
-    safeResult.complexity || safeResult.complexity_analysis || safeResult.complexityAnalysis || safeResult.metrics || {}
+  const complexity = normalizeComplexity(
+    safeResult.complexity ||
+    safeResult.complexity_analysis ||
+    safeResult.complexityAnalysis ||
+    safeResult.metrics ||
+    {}
   );
 
   const security = normalizeBackendSecurity(safeResult.security);
@@ -749,7 +693,6 @@ function Analyzer() {
       const rawStaticAnalysis = backend.static_analysis ?? backend.staticAnalysis ?? backend.issues ?? parsed.staticAnalysis;
       const normalizedStaticAnalysis = normalizeStaticAnalysis(rawStaticAnalysis);
 
-      // Read post-fix analysis — prefer backend key post_fix_static_analysis
       const rawPostFixAnalysis =
         backend.post_fix_static_analysis ??
         backend.post_fix_analysis ??
@@ -929,7 +872,6 @@ function Analyzer() {
       ? "No warnings."
       : report.warnings.map((warning, index) => `${index + 1}. ${warning}`).join("\n");
 
-    // Corrected code heading & note (with PARTIAL support)
     const correctedCodeHeading =
       report.fixStatus === "partial"
         ? "PARTIALLY FIXED CODE (MANUAL REVIEW NEEDED):"
@@ -1440,7 +1382,6 @@ Analysis completed successfully
     drawSectionTitle("SUGGESTED FIX");
     drawParagraph(report.suggestedFix);
 
-    /* CORRECTED CODE — with PARTIAL support */
     drawSectionTitle(
       report.fixStatus === "partial"
         ? "PARTIALLY FIXED CODE (MANUAL REVIEW NEEDED)"
@@ -1754,7 +1695,6 @@ Analysis completed successfully
               <p>{result.suggestedFix || "Review the detected issue and apply the recommended correction."}</p>
             </div>
 
-            {/* CORRECTED CODE — with PARTIAL support */}
             <div className="report-section corrected-code">
               <div className="report-section-title">
                 <FaCode />
