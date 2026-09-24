@@ -14,12 +14,11 @@ from werkzeug.security import (
 
 import secrets
 import os
-import smtplib
+import requests
 
 from datetime import datetime, timedelta
 from urllib.parse import quote
 
-from email.message import EmailMessage
 from dotenv import load_dotenv
 
 
@@ -41,8 +40,12 @@ auth_bp = Blueprint("auth", __name__)
 # EMAIL SETTINGS
 # =========================================================
 
-MAIL_USERNAME = os.getenv("MAIL_USERNAME")
-MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+
+RESEND_FROM_EMAIL = os.getenv(
+    "RESEND_FROM_EMAIL",
+    "onboarding@resend.dev"
+)
 
 FRONTEND_URL = os.getenv(
     "FRONTEND_URL",
@@ -59,28 +62,16 @@ def send_reset_email(
     reset_link
 ):
 
-    if not MAIL_USERNAME:
+    if not RESEND_API_KEY:
         raise ValueError(
-            "MAIL_USERNAME is missing in .env"
+            "RESEND_API_KEY is missing."
         )
-
-    if not MAIL_PASSWORD:
-        raise ValueError(
-            "MAIL_PASSWORD is missing in .env"
-        )
-
-    message = EmailMessage()
-
-    message["Subject"] = "Reset Your BugAI Password"
-    message["From"] = MAIL_USERNAME
-    message["To"] = recipient_email
 
     # -----------------------------------------------------
     # Plain text version
     # -----------------------------------------------------
 
-    message.set_content(
-        f"""
+    plain_text = f"""
 Hello,
 
 We received a request to reset your BugAI password.
@@ -97,7 +88,6 @@ Regards,
 BugAI
 AI Software Bug Analyzer
 """.strip()
-    )
 
     # -----------------------------------------------------
     # HTML version
@@ -184,28 +174,51 @@ AI Software Bug Analyzer
     </html>
     """
 
-    message.add_alternative(
-        html_content,
-        subtype="html"
+    # -----------------------------------------------------
+    # SEND USING RESEND API
+    # -----------------------------------------------------
+
+    response = requests.post(
+        "https://api.resend.com/emails",
+        headers={
+            "Authorization": f"Bearer {RESEND_API_KEY}",
+            "Content-Type": "application/json"
+        },
+        json={
+            "from": RESEND_FROM_EMAIL,
+            "to": [recipient_email],
+            "subject": "Reset Your BugAI Password",
+            "text": plain_text,
+            "html": html_content
+        },
+        timeout=15
     )
 
     # -----------------------------------------------------
-    # Gmail SMTP
+    # CHECK RESEND RESPONSE
     # -----------------------------------------------------
 
-    with smtplib.SMTP(
-        "smtp.gmail.com",
-        587
-    ) as server:
+    if not response.ok:
 
-        server.starttls()
-
-        server.login(
-            MAIL_USERNAME,
-            MAIL_PASSWORD
+        print(
+            "Resend API error:",
+            response.status_code,
+            response.text
         )
 
-        server.send_message(message)
+        raise Exception(
+            f"Resend email failed: "
+            f"{response.status_code}"
+        )
+
+    print(
+        "Password reset email sent successfully."
+    )
+
+    print(
+        "Resend response:",
+        response.text
+    )
 
 
 # =========================================================
@@ -522,7 +535,7 @@ def forgot_password():
                 "message":
                     "The reset request was created, "
                     "but the email could not be sent. "
-                    "Please check the email configuration."
+                    "Please try again later."
 
             }), 500
 
