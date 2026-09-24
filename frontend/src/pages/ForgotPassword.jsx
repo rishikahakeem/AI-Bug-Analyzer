@@ -2,12 +2,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import "./Auth.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
@@ -64,7 +62,7 @@ function ForgotPassword() {
         setError(error.response.data.message);
       } else {
         setError(
-          "Unable to connect to the backend. Make sure Flask is running."
+          "Unable to connect to the backend. Please try again."
         );
       }
     } finally {
@@ -75,11 +73,8 @@ function ForgotPassword() {
   return (
     <main className="auth-page">
       <div className="auth-card">
-
         <div className="auth-logo">
-          <div className="auth-logo-icon">
-            AI
-          </div>
+          <div className="auth-logo-icon">AI</div>
         </div>
 
         <div className="auth-header">
@@ -92,9 +87,7 @@ function ForgotPassword() {
         </div>
 
         <form onSubmit={handleSubmit}>
-
           <div className="form-group">
-
             <label htmlFor="email">
               Email Address
             </label>
@@ -112,7 +105,6 @@ function ForgotPassword() {
               }}
               autoComplete="email"
             />
-
           </div>
 
           {error && (
@@ -136,23 +128,20 @@ function ForgotPassword() {
               ? "Sending..."
               : "Send Reset Link"}
           </button>
-
         </form>
 
         <div className="auth-footer">
-
           <p>
             Remember your password?{" "}
             <Link to="/login">
               Back to Login
             </Link>
           </p>
-
         </div>
-
       </div>
     </main>
   );
 }
 
 export default ForgotPassword;
+
